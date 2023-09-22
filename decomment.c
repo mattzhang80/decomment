@@ -40,7 +40,22 @@ enum State handleCommentStart(int currChar) {
   if (currChar == '*') {
     putchar(' ');
     state = IN_COMMENT;
-  } else {
+  } 
+  else if (currChar == '/') {
+    putchar('/');
+    state = BEGIN_COMMENT;
+  }
+  else if (currChar == '\''){
+    putchar('/');
+    putchar(currChar);
+    state = IN_CHAR_LIT;
+  }
+  else if (currChar == '"'){
+    putchar('/');
+    putchar(currChar);
+    state = IN_STRING_LIT;
+  }
+  else {
     putchar('/');
     putchar(currChar);
     state = START;
@@ -49,7 +64,6 @@ enum State handleCommentStart(int currChar) {
 }
 
 enum State handleInComment(int currChar) {
-  printf("in comment");
   enum State state;
   state = IN_COMMENT;
   if(currChar == '\n')
@@ -61,10 +75,16 @@ enum State handleInComment(int currChar) {
 
 enum State handleEndComment(int currChar) {
   enum State state;
-  if (currChar == '/')
+  if (currChar == '/'){
     state = START;
+    return state;
+  }
   else if (currChar == '*')
     state = END_COMMENT;
+  else if (currChar == '\n'){
+    putchar('\n');
+    state = IN_COMMENT;
+  }
   else 
     state = IN_COMMENT;
   return state;
@@ -93,35 +113,31 @@ enum State handleInCharLit(int currChar) {
 }
 
 enum State handleEscString(int currChar) {
-  if (currChar == '/') {
-    return BEGIN_COMMENT;
-  }
-  enum State state;
-  state = ESC_STRING;
   putchar(currChar);
-  return state;
+  return IN_STRING_LIT;
 }
 
 enum State handleEscChar(int currChar) {
-  if(currChar == '/') {
-    return BEGIN_COMMENT;
-    enum State state;
-    state = ESC_CHAR;
-    putchar(currChar);
-    return state;
-  } 
+  putchar(currChar);
+  return IN_CHAR_LIT;
 }
 
 int main(int argc, char *argv[]) {
   enum State state;
   int currChar;
+  int currline = 1;
+  int linestart = 0;
   state = START;
   while ((currChar = getchar()) != EOF) {
+    if(currChar == '\n'){
+      currline++;
+    }
     switch (state) {
       case START:
         state = handleStart(currChar);
         break;
       case BEGIN_COMMENT:
+        linestart = currline;
         state = handleCommentStart(currChar);
         break;
       case IN_COMMENT:
@@ -142,10 +158,14 @@ int main(int argc, char *argv[]) {
       case ESC_CHAR:
         state = handleEscChar(currChar);
         break;
-      default:
-        printf("Invalid state %d\n", state);
-        exit(1);
     }
+  }
+  if(state == IN_COMMENT || state == END_COMMENT) {
+    fprintf(stderr, "Error: line %d: unterminated comment\n", linestart);
+    exit(1);
+  }
+  if(state == BEGIN_COMMENT){
+    putchar('/');
   }
   return 0;
 }
