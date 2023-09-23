@@ -70,7 +70,7 @@ enum State handleCommentStart(int currChar) {
   }
   return state;
 }
-/* handleInComment handles input when in the IN_COMMENT state, which is the state that occurs after a '/*' is read.
+/* handleInComment handles input when in the IN_COMMENT state, which is the state that occurs after a '/' and '*' is read.
 In this function, it checks if it is reaching the end of comment, a newline, or still in a comment. */
 
 enum State handleInComment(int currChar) {
@@ -145,7 +145,7 @@ Return EXIT_SUCCESS if the program runs successfully, and EXIT_FAILURE if it doe
 Does not run successfully if there are unterminated comments.
 */
 int main() {
-  // Initialize variables.
+  /* Initialize variables. */
   enum State state;
   int currChar;
   int currline = 1;
