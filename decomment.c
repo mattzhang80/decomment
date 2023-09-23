@@ -153,7 +153,7 @@ int main() {
   state = START;
   /* Loop through DFA using input. */
   while ((currChar = getchar()) != EOF) {
-    // Tracks line number
+    /* Tracks line number */
     if(currChar == '\n'){
       currline++;
     }
