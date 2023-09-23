@@ -2,8 +2,7 @@ Assignment 1 readme File
 
 ------------------------------------------------------------------------
 What is your name?
-
-
+Matthew Zhang
 
 ------------------------------------------------------------------------
 What authorized sources of information did you use to complete the
@@ -11,8 +10,12 @@ assignment? COPY THE LIST of authorized sources of information given
 in the "Policies" web page (also available on armlab in the file
 ~cos217/AuthorizedSourcesList ) to this section of the readme file,
 and edit it as appropriate.
-
-
+The course's lectures.
+The course's precepts.
+The course's website.
+Lecture slides and precept handouts.
+The course's current staff members outside of class time through Ed.
+Current Intro Lab TAs through visits to the Intro COS Lab.
 
 ------------------------------------------------------------------------
 What unauthorized sources of information did you use to complete the
@@ -25,19 +28,21 @@ may trigger a course penalty, and depending on the nature of the
 interaction, may additionally require the interaction being reported
 to the Committee on Discipline. Write "None" if you used no
 unauthorized sources of information.
-
-
-
+None
 ------------------------------------------------------------------------
 What is your assessment of the assignment? Was it helpful? Was it fun?
-
-
-
+I hated this assigment, it was impossible to debug so many cases. Even 
+the Lab TAs were stumped on some of my bugs (Though, I am still 
+thankful for them). I spent around 12 hours on this assignment which is 
+a lot more than I expected. I did not have fun at all, but I did learn
+more about systems programming, I guess. I hate to think about how this
+will be the "easiest" assignment of the semester. This is seriously 
+making me question my aspirations as a COS major or Software Engineer.
 ------------------------------------------------------------------------
 (optional) What information can you provide about your submission that
 will help your grader to grade it in the most favorable light? In
 particular, what bugs are in your submission?
-
-
-
+Thankfully, I got rid of the bugs, but I've edited this code throughout
+so many different sessions that it may not be a cohesive style. However,
+I did try to make it as readable as possible. It should pass all cases.
 ------------------------------------------------------------------------

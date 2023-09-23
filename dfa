@@ -1,41 +1,44 @@
 ------------------------------------------------------------------------
-DFA for Decomment
+DFA for Decomment Assignment
 ------------------------------------------------------------------------
 
 START (accept) <-- the start state
    /:  BEGIN_COMMENT
    ':  IN_CHAR_LIT
    ":  IN_STRING_LIT
+   \n: START
    other:  START
    
 BEGIN_COMMENT (accept)
-   ':  IN_CHAR_LIT
-   ":  IN_STRING_LIT
    *:  IN_COMMENT
    /:  BEGIN_COMMENT 
+   ':  IN_CHAR_LIT
+   ":  IN_STRING_LIT
    other:  START
    
 IN_COMMENT (reject)
+   \n: IN_COMMENT
    *:  END_COMMENT
    other:  IN_COMMENT
    
 END_COMMENT (reject)
    /:  START
    *:  END_COMMENT
+   \n: IN_COMMENT
    other:  IN_COMMENT
+
+IN_CHAR_LIT (accept)
+   ':  START
+   \:  ESC_CHAR
+   other:  IN_CHAR_LIT
    
 IN_STRING_LIT (accept)
    ":  START
    \:  ESC_STRING
    other:  IN_STRING_LIT
-   
+
 ESC_STRING (accept)
    other:  IN_STRING_LIT
-   
-IN_CHAR_LIT (accept)
-   ':  START
-   \:  ESC_CHAR
-   other:  IN_CHAR_LIT
    
 ESC_CHAR (accept)
    other:  IN_CHAR_LIT
