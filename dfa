@@ -1,8 +1,8 @@
 ------------------------------------------------------------------------
-DFA for Decomment Assignment
+DFA for Decomment Assignment 1
 ------------------------------------------------------------------------
 
-START (accept) <-- the start state
+START (accept) <-- the start state 
    /:  BEGIN_COMMENT
    ':  IN_CHAR_LIT
    ":  IN_STRING_LIT
